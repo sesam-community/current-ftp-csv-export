@@ -30,4 +30,4 @@ run:
 	./$(BINARY_NAME)
 deps:
 	$(GOGET) github.com/gorilla/mux
-	$(GOGET) github.com/timurgen/ftps
+	$(GOGET) github.com/webguerilla/ftps
