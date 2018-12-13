@@ -57,21 +57,25 @@ func PublishMessage(w http.ResponseWriter, r *http.Request) {
 	err := ftps.Connect(server, ftpPort)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	err = ftps.Login(user, password)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	data, err := ftps.RetrieveFileData("currentdata.csv")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	err = ftps.Quit()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	reader := csv.NewReader(bytes.NewReader(data))
@@ -81,6 +85,7 @@ func PublishMessage(w http.ResponseWriter, r *http.Request) {
 	csvData, err := reader.ReadAll()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	var line ProjectLine
@@ -102,6 +107,7 @@ func PublishMessage(w http.ResponseWriter, r *http.Request) {
 	jsonData, err := json.Marshal(lines)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
