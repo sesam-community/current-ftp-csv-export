@@ -1,4 +1,7 @@
 # current-ftp-csv-export
+
+[![Build Status](https://travis-ci.org/sesam-community/current-ftp-csv-export.svg?branch=master)](https://travis-ci.org/sesam-community/current-ftp-csv-export)
+
 Export av Current time data (csv file) from FTPS to Sesam
 
 ## System setup
